@@ -1,0 +1,22 @@
+h3 {
+	color: red;
+}
+
+table, th, td {
+  border-style: solid;
+  border-width: 1px;
+  border-collapse: collapse;
+  width:50%
+}
+
+body{
+background-color: lightblue;
+}
+
+#n1{
+	width:640px;height:360px;
+}
+h1{
+	background-color: yellow;
+	width:40%;
+}
