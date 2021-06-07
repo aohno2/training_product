@@ -1,0 +1,178 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+				
+<head>
+	<title>マイページ</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+				
+				</head>
+				
+				<div>
+				
+				<ul class="nav nav-tabs">
+				  <li class="nav-item">
+				    <a class="nav-link" th:href="@{/cb/{id}(id=${customer.customerId})}">マイページ</a>
+				  </li>
+				  <li class="nav-item">
+				    <a class="nav-link" th:href="@{/cb/{id}/book/list(id=${customer.customerId})}">マイブック</a>
+				  </li>
+				  <li class="nav-item">
+				    <a class="nav-link" th:href="@{/cb/{id}/book(id=${customer.customerId})}">ブック購入</a>
+				  </li>
+				  <li class="nav-item">
+				    <a class="nav-link justify-content-end" data-toggle="modal" data-target="#myModal">退会</a>
+				  </li>
+				</ul>
+				</div>
+				
+				<div class="container bootstrap snippet">
+				    <div class="row">
+				  		<div class="col-sm-10"><h1 th:text="'こんにちは ' +${customer.customerName}+ 'さん'"></h1></div>
+				    	
+				    </div>
+				    <div class="row">
+				  		<div class="col-sm-3">
+				              
+				
+				      <div class="text-center">
+				        <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+				        <!-- <h6>写真をアップロードしてください</h6>
+				        <input type="file" class="text-center center-block file-upload"> -->
+				      </div><br>
+				
+				               
+				          
+				          
+				        </div>
+				        
+				    	<div class="col-sm-9">
+				           
+				
+				
+				              
+				          <div class="tab-content">
+				            <div class="tab-pane active" id="home">
+				                <hr>
+				       <div th:action="@{/cb/{id}(id=*{customerId})/edit}" th:method="put" th:object="${customer}">
+				                      <div class="form-group">
+				                          </div> 
+				                          <div class="col-xs-6">
+				                          
+				                              <label for="customer_name"><h4>名前<span class="text-danger">*</span></h4></label>
+				                              <input class="form-control" type="text" readonly th:field="*{customerName}" />
+				                      </div>
+				
+				                     
+				                      <div class="form-group">
+				                          
+				                          <div class="col-xs-6">
+				                            <label for="customer_zipcode"><h4>郵便番号</h4></label>
+				                              <input class="form-control" type="text" readonly th:field="*{customerZipcode}" />
+				                          </div>
+				                      </div>
+				          
+				                      <div class="form-group">
+				                          
+				                          <div class="col-xs-6">
+				                              <label for="customer_address"><h4>住所</h4></label>
+				                              <input class="form-control" type="text" readonly th:field="*{customerAddress}" />
+				                          </div>
+				                      </div>
+				          
+				                      <div class="form-group">
+				                          <div class="col-xs-6">
+				                             <label for="customer_phone_num"><h4>電話番号</h4></label>
+				                              <input class="form-control" type="text" readonly th:field="*{customerPhoneNum}" />
+				                          </div>
+				                      </div>
+				                      <div class="form-group">
+				                          
+				                          <div class="col-xs-6">
+				                              <label for="customer_mailaddress"><h4>メールアドレス<span class="text-danger">*</span></h4></label>
+				                               <input class="form-control" type="text" readonly th:field="*{customerMailAddress}" />
+				                          </div>
+				                      </div>
+				                      <div class="form-group">
+				                          
+				                          <div class="col-xs-6">
+				                              <label for="customer_creditcard_num"><h4>クレジットカード番号<span class="text-danger">*</span></h4></label>
+				                               <input class="form-control" type="text" readonly th:field="*{customerCreditcardNum}" />
+				                          </div>
+				                      </div>
+				                      <div class="form-group">
+				                          
+				                          <div class="col-xs-6">
+				                              <label for="customer_password"><h4>パスワード<span class="text-danger">*</span></h4></label>
+				                               <input class="form-control" type="text" readonly th:field="*{customerPassword}" />
+				                          </div>
+				                      </div>
+				                      <div class="form-group">
+				                          
+				                          <div class="col-xs-6">
+				                            <label for="customer_password_check"><h4>パスワード（確認）<span class="text-danger">*</span></h4></label>
+				                              <input class="form-control" type="text" readonly th:field="*{customerPasswordCheck}" />
+				                          </div>
+				                      </div>
+				                      </div>
+				                      <br>
+				                      <br> 	
+				                               	<div class="col-xs-12 text-right">
+				                                  <br>
+		<button type="submit" class="btn btn-lg "><a th:href="@{/cb/{id}/edit(id=*{id})}">変更</a></button>
+				       </div>
+				        </div>
+				
+				      <div class="modal fade" id="myModal">
+				    <div class="modal-dialog">
+				      <div class="modal-content">
+				      
+				      
+				        <div class="modal-header">
+				          <h4 class="modal-title">退会ボタンが押されました。
+				            <br>
+				          退会するとデータはすべて削除されます。</h4>
+				          <button type="button" class="close" data-dismiss="modal">×</button>
+				        </div>
+				        
+				        
+				        <div class="modal-body">
+				        本当に退会しますか？
+				        </div>
+				        
+				        
+				        <div class="modal-footer">
+				          <div class="btn-group">
+				          <form th:action="@{/cb/{id}/delete(id=${customer.customerId})}" th:method="delete">
+				          <input class="btn btn-default btn-xs" type="submit" value="はい" />
+				          </form>
+				          <!-- <button type="button" class="btn btn-danger" data-dismiss="modal"><a th:href="@{/cb/{id}/delete(id=${customer.customerId})}">はい</a></button> -->
+				          <button type="button" class="btn btn-danger" data-dismiss="modal">いいえ</button>
+				        </div>
+				        </div>
+				        
+				      </div>
+				    </div>
+				  </div>
+				 
+				
+				 
+				               
+				              </div>
+				          </div>
+				
+				        </div>
+				    </div>
+				
+				</html>
