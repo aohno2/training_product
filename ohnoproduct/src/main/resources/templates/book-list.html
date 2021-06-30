@@ -10,16 +10,34 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- ---- Include the above in your HEAD tag -------- -->
 
+<script>
+$(document).ready(function(){
+  $('#myTable').DataTable({
+	  "language": {
+   			"url": "//cdn.datatables.net/plug-ins/3cfcc339e89/i18n/Japanese.json"
+   			
+   		},
+   		/* "stateSave": true */
+ });
+  
+	 
+});
+
+
+</script>
+
 <head>
-  <title>マイページ</title>
+  <title>本購入</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
 </head>
 	
+	<body>
 <ul class="nav nav-tabs">
   <li class="nav-item">
     <a class="nav-link" th:href="@{/cb/{id}(id=${customerId})}">マイページ</a>
@@ -30,20 +48,20 @@
   <li class="nav-item">
     <a class="nav-link"  th:href="@{/cb/{id}/book(id=${customerId})}">ブック購入</a>
   </li>
-  <li class="nav-item">
+  <!-- <li class="nav-item">
     <a class="nav-link justify-content-end" data-toggle="modal" data-target="#myModal">退会</a>
-  </li>
+  </li> -->
 </ul> 
 
 
 
 
 
- <div class="modal fade" id="myModal">
+<!--  <div class="modal fade" id="myModal">
     <div class="modal-dialog">
       <div class="modal-content">
       
-        <!-- Modal Header -->
+        Modal Header
         <div class="modal-header">
           <h4 class="modal-title">退会ボタンが押されました。
             <br>
@@ -51,12 +69,12 @@
           <button type="button" class="close" data-dismiss="modal">×</button>
         </div>
         
-        <!-- Modal body -->
+        Modal body
         <div class="modal-body">
         本当に退会しますか？
         </div>
         
-        <!-- Modal footer -->
+        Modal footer
         <div class="modal-footer">
           <div class="btn-group">
           <button type="button" class="btn btn-danger" data-dismiss="modal">はい</button>
@@ -66,13 +84,13 @@
         
       </div>
     </div>
-  </div>
+  </div> -->
 
 
 <form th:action="@{/cb/{id}/book(id=${customerId})}" th:method="post">
  <div class="container">
       <h1>本一覧</h1>
-      <table class="table">
+      <table class="table" id="myTable">
         <thead>
           <tr>
             <th>BookID</th>
@@ -91,12 +109,33 @@
             <td th:text="*{bookPublisher}"></td>
             <td th:text="*{bookPrice}"></td>
             <td th:text="*{bookReleaseDay}"></td>
-            <td><input type="checkbox" th:name="buyCheck" th:value="*{bookId}" /></td>
+            <td><input type="checkbox" class="checkBoxes" th:name="buyCheck" th:value="*{bookId}" /></td>
           </tr>
         </tbody>
       </table>
-       <button class="btn btn-primary btn-lg float-right" type="submit">購入</button>
+      <br>
+       <input class="btn btn-primary btn-lg float-right" value = "購入" type="submit" onClick="return isCheck()">
     </div>
     </form>
-
-  </html>
+    </body>
+    
+    <script>
+			function isCheck() {
+				var arr_checkBoxes = document.getElementsByClassName("checkBoxes");
+				var count = 0;
+				for (var i = 0; i < arr_checkBoxes.length; i++) {
+					if (arr_checkBoxes[i].checked) {
+						count++;
+					}
+				}
+				if (count > 0) {
+					return true;
+				} else {
+					window.alert("項目を1つ以上選択してください。");
+					return false;
+				}
+			}
+		</script>
+		
+	
+</html>

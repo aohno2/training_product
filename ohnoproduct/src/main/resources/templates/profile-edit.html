@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ja" class="fullscreen-bg" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>新規登録|雑誌のサブスク</title>
+  <title>登録情報編集</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -28,57 +28,87 @@
            <form th:action="@{/cb/{id}(id=*{customerId})}" th:method="post" th:object="${customer}">
            <input type="hidden" class="form-control" id="customerId" name="customerId" th:field="*{customerId}">
           <div class="form-group">
-          	<label class="control-label">名前</label>
+          	<label class="control-label">名前<label for="hissu" class="text-danger">*</label></label><label for="hissu">(</label><label for="hissu" class="text-danger">*</label><label for="hissu">は入力必須)</label>
             <!-- <label for="signup-customer_name" class="control-label sr-only">customer_name</label> -->
-            <input type="text" class="form-control" id="customerName" name="customerName" th:field="*{customerName}">
+            <input type="text" class="form-control" id="customerName" name="customerName" th:field="*{customerName}" required>
+            <span th:if="${#fields.hasErrors('customerName')}" th:errors="*{customerName}"></span>
+            
           </div>
           <br>
           <div class="form-group">
           	<label for="customer_zipcode">郵便番号</label>
             <label for="signup-customer_zipcode" class="control-label sr-only">customer_zipcode</label>
             <input type="text" class="form-control" id="customerZipcode" name="customerZipcode" th:field="*{customerZipcode}">
+            <span th:if="${#fields.hasErrors('customerZipcode')}" th:errors="*{customerZipcode}"></span>
+           
           </div>
           <br>
           <div class="form-group">
           	<label for="customer_address">住所</label>
             <label for="signup-customer_address" class="control-label sr-only">customer_address</label>
             <input type="text" class="form-control" id="customerAddress" name="customerAddress" th:field="*{customerAddress}">
+            <span th:if="${#fields.hasErrors('customerAddress')}" th:errors="*{customerAddress}"></span>
+            
           </div>
           <br>
           <div class="form-group">
           	<label for="customer_phone_num">電話番号</label>
             <label for="signup-customer_phone_num" class="control-label sr-only">customer_phone_num</label>
             <input type="text" class="form-control" id="customerPhoneNum" name="customerPhoneNum" th:field="*{customerPhoneNum}">
+            <span th:if="${#fields.hasErrors('customerPhoneNum')}" th:errors="*{customerPhoneNum}"></span>
+            
           </div>
           <br>
           <div class="form-group">
-          	<label for="customer_mail_address">メールアドレス</label>
+          	<label for="customer_mail_address">メールアドレス<span class="text-danger">*</span></label>
             <label for="signup-customer_mail_address" class="control-label sr-only">customer_mail_address</label>
-            <input type="text" class="form-control" id="customerMailAddress" name="customerMailAddress" th:field="*{customerMailAddress}">
+            <input type="email" class="form-control" id="customerMailAddress" name="customerMailAddress" th:field="*{customerMailAddress}" required>
+            <span th:if="${#fields.hasErrors('customerMailAddress')}" th:errors="*{customerMailAddress}"></span>
+            
           </div>
           <br>
           <div class="form-group">
-          	<label for="customer_creditcard_num">クレジットカード番号</label>
+          	<label for="customer_creditcard_num">クレジットカード番号<span class="text-danger">*</span></label>
             <label for="signup-customer_creditcard_num" class="control-label sr-only">customer_creditcard_num</label>
-            <input type="text" class="form-control" id="customerCreditcardNum" name="customerCreditcardNum" th:field="*{customerCreditcardNum}">
+            <input type="text" class="form-control" id="customerCreditcardNum" name="customerCreditcardNum" th:field="*{customerCreditcardNum}" required>
+            <span th:if="${#fields.hasErrors('customerCreditcardNum')}" th:errors="*{customerCreditcardNum}"></span>
+            
           </div>
           <br>
          <div class="form-group">
-          	<label for="customer_password">パスワード</label>
+          	<label for="customer_password">パスワード<span class="text-danger">*</span></label>
             <label for="signup-customer_password" class="control-label sr-only">customer_password</label>
-            <input type="password" class="form-control" id="customerPassword" name="customerPassword" th:field="*{customerPassword}">
+            <input type="password" class="form-control" id="customerPassword" name="customerPassword" th:field="*{customerPassword}" required>
+            <span th:if="${#fields.hasErrors('customerPassword')}" th:errors="*{customerPassword}"></span>
+            
           </div>
           <br>
          <div class="form-group">
-          	<label for="customer_password_check">パスワード確認用</label>
+          	<label for="customer_password_check">パスワード確認用<span class="text-danger">*</span></label>
             <label for="signup-customer_password_check" class="control-label sr-only">customer_password_check</label>
-            <input type="password" class="form-control" id="customerPasswordCheck" name="customerPasswordCheck" th:field="*{customerPasswordCheck}">
+            <input type="password" class="form-control" id="customerPasswordCheck" name="customerPasswordCheck" oninput="CheckPassword(this)" th:field="*{customerPasswordCheck}" required>
+            <span th:if="${#fields.hasErrors('customerPasswordCheck')}" th:errors="*{customerPasswordCheck}"></span>
+            
             </div>
           <br>
-          <button type="submit" class="btn btn-primary btn-lg btn-block">変更を保存</button>
+          <input type="submit" class="btn btn-primary btn-lg btn-block" value="変更を保存">
          </form>
          
          </div>
+          <script>
+      function CheckPassword(confirm){
+  		// 入力値取得
+  		var input1 = customerPassword.value;
+  		var input2 = customerPasswordCheck.value;
+  		// パスワード比較
+  		if(input1 != input2){
+  			confirm.setCustomValidity("パスワードが一致しません。");
+  		}
+  		else{
+  			confirm.setCustomValidity('');
+  		}
+  	}
+      </script>
       </div>
       </div>
     </div>

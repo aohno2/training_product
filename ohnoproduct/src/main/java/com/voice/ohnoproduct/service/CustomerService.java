@@ -21,16 +21,25 @@ public class CustomerService {
 		return crepo.getOne(id);
 	}
 	
+//	public Object findOne(String pass) {
+//		return crepo.getOne(pass);
+//	}
+	
+
+	
 	public List<Customer> findAll() {
         return crepo.findAll();
     }
 	
-	public void delete(Long id) {
-//		Customer cus = crepo.getOne(id);
-        crepo.deleteById(id);
+	public void delete(Long customerId) {
+		Customer customer = findOne(customerId);
+        crepo.delete(customer);
         
 	}
 	
+	public Customer getByEmailPass(String customerMailAddress, String customerPassword) {
+		return crepo.getByEmailPass(customerMailAddress, customerPassword);
+	}
 //	 public List<Customer> innerJoin() {
 //	    	List<Object[]> list = crepo.find();
 //	    	

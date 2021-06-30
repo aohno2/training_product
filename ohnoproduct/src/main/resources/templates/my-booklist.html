@@ -11,14 +11,22 @@
 <!-- ---- Include the above in your HEAD tag -------- -->
 
 <head>
-  <title>マイページ</title>
+  <title>マイブック</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
 </head>
+<script>
+$(document).ready(function(){
+  $('#myTable').DataTable({"language": {
+   		"url": "//cdn.datatables.net/plug-ins/3cfcc339e89/i18n/Japanese.json"
+  		}});
+});
+</script>
 	
 <ul class="nav nav-tabs">
   <li class="nav-item">
@@ -30,20 +38,23 @@
   <li class="nav-item">
     <a class="nav-link"  th:href="@{/cb/{id}/book(id=${customerId})}">ブック購入</a>
   </li>
+ <!--  <li class="nav-item">
+				    <a class="nav-link justify-content-end" data-toggle="modal" data-target="#myModal1">ログアウト</a>
+				  </li>
   <li class="nav-item">
-    <a class="nav-link justify-content-end" data-toggle="modal" data-target="#myModal">退会</a>
-  </li>
+    <a class="nav-link justify-content-end" data-toggle="modal" data-target="#myModal2">退会</a>
+  </li> -->
 </ul> 
 
 
 
 
 
- <div class="modal fade" id="myModal">
+<!--  <div class="modal fade" id="myModal">
     <div class="modal-dialog">
       <div class="modal-content">
       
-        <!-- Modal Header -->
+        Modal Header
         <div class="modal-header">
           <h4 class="modal-title">退会ボタンが押されました。
             <br>
@@ -51,12 +62,12 @@
           <button type="button" class="close" data-dismiss="modal">×</button>
         </div>
         
-        <!-- Modal body -->
+        Modal body
         <div class="modal-body">
         本当に退会しますか？
         </div>
         
-        <!-- Modal footer -->
+        Modal footer
         <div class="modal-footer">
           <div class="btn-group">
           <button type="button" class="btn btn-danger" data-dismiss="modal">はい</button>
@@ -66,13 +77,13 @@
         
       </div>
     </div>
-  </div>
+  </div> -->
 
 
 <form th:action="@{/cb/{id}/book(id=${customerId})}">
  <div class="container">
       <h1>マイブック一覧</h1>
-      <table class="table">
+      <table class="table" id="myTable">
         <thead>
           <tr>
             <th>BookID</th>
@@ -94,7 +105,8 @@
           </tr>
         </tbody>
       </table>
-      <button type="submit" class="btn btn-lg " th:href="@{/cb/{id}/book(id=${customerId})}">追加購入</button>
+      <br>
+      <button type="submit" class="btn btn btn-primary btn-lg float-right" th:href="@{/cb/{id}/book(id=${customerId})}">追加購入</button>
     </div>
     </form>
 

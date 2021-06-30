@@ -28,13 +28,4 @@ public class BookController {
 	       model.addAttribute("customerId", id);
 	        return "book-list"; 
 	    }
-	 
-//	//新規登録情報の保存        
-//	  @PostMapping("/cb/register")
-//	     public String create(@ModelAttribute Order order) { 
-//	        bookService.save(order);
-//	        Long id = customer.getCustomerId();
-//	        
-//	         return "redirect:/cb/"+id+"/";
-//	     }
 }

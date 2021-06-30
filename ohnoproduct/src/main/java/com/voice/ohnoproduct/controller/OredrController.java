@@ -20,8 +20,14 @@ public class OredrController {
     private OrderService orderService;
 	
 	@PostMapping("/cb/{id}/book")
+	
 	public String addOrder(@RequestParam("buyCheck") List<String> bookIds ,@PathVariable Long id,Model model){
-	for(String bookIdStr : bookIds)	{
+//		if(buyCheck == "F") {
+//			return "redirect:/cb/"+id+"/book";
+//		}
+		
+		for(String bookIdStr : bookIds)	{
+			
 		   long bookIdLong = Long.parseLong(bookIdStr);
 		   OrderId orderId = new OrderId(id,bookIdLong);
 		   Order newOrder = new Order(orderId);
@@ -31,7 +37,9 @@ public class OredrController {
 		System.out.println(bookIds);	    
 //	    return "my-booklist";
 		return "redirect:/cb/"+id+"/book/list";
-	}
+		}
+	
+	
 	
 	//マイブックのget
 	@GetMapping("/cb/{id}/book/list")
